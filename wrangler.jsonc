@@ -2,7 +2,7 @@
  * For more details on how to configure Wrangler, refer to:
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
- {
+{
 	// "$schema": "node_modules/wrangler/config-schema.json",
 	"name": "vibesdk-production",
 	"main": "worker/index.ts",
@@ -51,6 +51,7 @@
 	"images": {
 		"binding": "IMAGES"
 	},
+    /* ** REMOVED: Requires Cloudflare Workers for Platforms (Dispatch Namespaces) **
     "dispatch_namespaces": [
         {
             "binding": "DISPATCHER",
@@ -58,6 +59,9 @@
             "remote": true
         }
     ],
+    */
+	/*
+	** REMOVED: Requires Cloudflare Workers for Platforms (Containers/Sandboxes) **
 	"containers": [
 		{
 			"class_name": "UserAppSandboxService",
@@ -73,6 +77,7 @@
             "rollout_step_percentage": 100
 		}
 	],
+	*/
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -88,10 +93,12 @@
 				"class_name": "CodeGeneratorAgent",
 				"name": "CodeGenObject"
 			},
+            /* ** REMOVED: Requires Containers/Sandbox feature **
             {
                 "class_name": "UserAppSandboxService",
                 "name": "Sandbox"
             },
+            */
             {
                 "class_name": "DORateLimitStore",
                 "name": "DORateLimitStore"
@@ -141,11 +148,14 @@
 	"vars": {
         "TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
         "ALLOWED_EMAIL": "nya.onmoseti@gmail.com",
+        /*
+        ** REMOVED: Related to Workers for Platforms features **
         "DISPATCH_NAMESPACE": "vibesdk-default-namespace",
-        "CLOUDFLARE_AI_GATEWAY": "vibesdk-gateway",
-        "CUSTOM_DOMAIN": "worker-name].[user].workers.dev",
         "MAX_SANDBOX_INSTANCES": "10",
-        "SANDBOX_INSTANCE_TYPE": "standard"
+        "SANDBOX_INSTANCE_TYPE": "standard",
+        */
+        "CLOUDFLARE_AI_GATEWAY": "vibesdk-gateway",
+        "CUSTOM_DOMAIN": "worker-name].[user].workers.dev"
     },
 	"workers_dev": false,
 	"preview_urls": false
